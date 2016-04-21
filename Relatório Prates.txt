@@ -1,3 +1,4 @@
 [07/04/2016 - 10:54] Criado o docx com as regras do jogo. Foi discutido também os módulos necessários
                      para o trabalho e as suas relações.
 [13/04/2016 - 22:43] Digitalizada a arquitetura do projeto. Primeira versão dela.
+[21/04/2016 - 15:57] Começando baralho.h. Primeira função feita, junto do script. Tudo testado e funcionando.

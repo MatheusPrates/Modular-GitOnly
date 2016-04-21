@@ -4,3 +4,4 @@
 					 com as Especificações de Requisitos.
 [13/04/2016 - 19:13] Realizado modificações no docx com as regras do jogo e no docx com as especificações
 					 de requesitos.
+[21/04/2016 - 15:57] Começando baralho.h. Primeira função feita, junto do script. Tudo testado e funcionando.
