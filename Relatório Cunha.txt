@@ -1,0 +1,6 @@
+[07/04/2016 - 10:54] Criado o docx com as regras do jogo. Foi discutido também os módulos necessários
+                     para o trabalho e as suas relações.
+[11/04/2016 - 18:55] Alterado o docx com as regras do jogo, devido a alguns erros nele. Criado o docx
+					 com as Especificações de Requisitos.
+[13/04/2016 - 19:13] Realizado modificações no docx com as regras do jogo e no docx com as especificações
+					 de requesitos.
