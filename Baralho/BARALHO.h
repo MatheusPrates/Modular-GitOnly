@@ -67,6 +67,7 @@ typedef LIS_tppLista Baralho;
 
 
 
+void BAR_embaralha(Baralho baralho);
 
 
 
