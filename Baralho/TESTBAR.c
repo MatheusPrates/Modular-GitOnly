@@ -71,3 +71,5 @@ Baralho BaralhoDeCartas;
          } /* fim ativa: Testar CriarLista */
 	}	 
 		 
+
+	 // Testando aqui.
