@@ -1,4 +1,4 @@
-// Script:    TesteBaralho.script
+﻿// Script:    TesteBaralho.script
 // Autor:     Matheus³
 // Data:      21/abr/2016
 // Propósito: Testar superficialmente o módulo baralho
@@ -6,5 +6,11 @@
 
 //== Inicializar valores
 
+
 == Criar o baralho 
-=criarbaralho 
+=criarbaralho	 
+
+== Destruir o baralho
+=destruirbaralho
+
+// fim
