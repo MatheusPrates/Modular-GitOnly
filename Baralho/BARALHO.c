@@ -18,9 +18,13 @@
 
 #include <malloc.h>
 #include <stdio.h>
+<<<<<<< HEAD
+#include <assert.h>
+=======
 #include <stdlib.h>
 #include <time.h>
 
+>>>>>>> 7f0ce89719d660433dd14ac43098f4da68a39a8f
 
 #include "BARALHO.h"
 
@@ -89,7 +93,7 @@ static void prepara(void)
 /***************************************************************************
 *
 *  Função: BAR  &Criar baralho
-*  ************************************************************************/
+***************************************************************************/
 
 Baralho BAR_CriarBaralho()
 {
@@ -135,5 +139,15 @@ void BAR_embaralha(Baralho baralho)
 
 
 
+
+/***************************************************************************
+*
+*  Função: BAR  &Destruir baralho
+***************************************************************************/
+
+	void BAR_DestruirBaralho(Baralho Bar)
+	{
+		LIS_DestruirLista(Bar);
+	}
 
 

@@ -40,6 +40,9 @@ typedef LIS_tppLista Baralho;
 
 	typedef enum {
 
+		BAR_CondRetOK ,
+				/*Concluiu corretamente*/
+
          
 
    } BAR_tpCondRet ;
@@ -63,7 +66,22 @@ typedef LIS_tppLista Baralho;
 
 	Baralho BAR_CriarBaralho();
 	
+/***********************************************************************
+*
+*  $FC Função: LIS  &Destruir baralho
+*
+*  $ED Descrição da função
+*     Destrói o baralho passado como parâmetro.
+*     Se ocorrer algum erro durante a destruição, o baralho resultará
+*     estruturalmente incorreto.
+*     OBS. não existe previsão para possíveis falhas de execução.
+*
+*  $FV Valor retornado
+*     BAR_CondRetOK    - destruiu sem problemas  (???)
+*
+***********************************************************************/
 
+	void BAR_DestruirBaralho(Baralho Bar);
 
 
 

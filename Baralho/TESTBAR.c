@@ -28,7 +28,8 @@
 
 #include "BARALHO.h"
 
-static const char CRIAR_BARALHO_CMD[ ] = "=criarbaralho"     ;
+static const char CRIAR_BARALHO_CMD[] = "=criarbaralho";
+static const char DESTRUIR_BARALHO_CMD[] = "=destruirbaralho";
 
 
 #define TRUE  1
@@ -44,10 +45,9 @@ Baralho BaralhoDeCartas;
    {
 		int inxLista  = -1 ,
 			numLidos   = -1 ,
-			validaBaralho = FALSE;
+			validaBaralho = FALSE;			/*variavel para saber se o baralho pode */
 
       
-
       
    
 		/* Testar CriarBaralho */
@@ -56,18 +56,41 @@ Baralho BaralhoDeCartas;
          {
 
             numLidos = LER_LerParametros("") ;
-
             if ( ( numLidos != 0 )			/*se o numero de parametros nao e zero ou caso a valida baralho seja TRUE*/
-              || (validaBaralho)==TRUE)
+              || validaBaralho==TRUE)
             {
                return TST_CondRetParm ;
             } /* if */
 
             BaralhoDeCartas	 =  BAR_CriarBaralho() ;
 
+			validaBaralho =  TRUE;		//???
+			
             return TST_CompararPonteiroNulo( 1 , BaralhoDeCartas ,
                "Erro em ponteiro de novo baralho\n."  ) ;
 
          } /* fim ativa: Testar CriarLista */
+		
+
+		 /* Testar DestruirBaralho */
+
+		 else if ( strcmp( ComandoTeste , DESTRUIR_BARALHO_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros("") ;
+
+            if ( ( numLidos != 0 )
+              || (!validaBaralho))       //??????
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            BAR_DestruirBaralho(BaralhoDeCartas) ;
+            BaralhoDeCartas = NULL ;
+
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Testar Destruir baralho */
 	}	 
 		 
