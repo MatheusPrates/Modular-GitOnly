@@ -1,0 +1,141 @@
+// Script:    TesteLista.script
+// Autor:     Arndt von Staa
+// Data:      02/abr/2008
+// Propósito: Testar superficialmente o módulo placar
+//
+
+== Inicializar valores
+=declararparm	OK			int 0
+=declararparm	SemMemoria		int 1
+=declararparm	PlacarNaoExiste		int 2
+=declararparm	ParamIncorreto		int 3
+=declararparm	RodadaNaoIniciada	int 4
+=declararparm	TrucoNaoPossivel	int 5
+
+
+
+//*****************TESTES SEM CRIAR O PLACAR E A RODADA***************
+
+==Pega Vitorias
+=pegavitoria		1	-1
+=pegavitoria		3	-1
+
+
+==Pega Pontos
+=pegapontos		1	-1
+=pegapontos		3	-1
+
+
+==Guarda Pontos
+=guardapontos		1	PlacarNaoExiste
+=guardapontos		3	PlacarNaoExiste
+
+
+==Guarda Vitorias
+=guardavitorias		1	PlacarNaoExiste
+=guardavitorias		3	PlacarNaoExiste
+
+
+==Termina Rodada
+=terminarodada		PlacarNaoExiste
+
+==Status Rodada
+=statusrodada		-1
+
+==Atualiza Valor Rodada
+=atualizarodada		1	PlacarNaoExiste
+=atualizarodada		3	PlacarNaoExiste
+
+==Checa Truco
+=checatruco		1	TrucoNaoPossivel
+=checatruco		3	TrucoNaoPossivel
+
+
+
+//*********************************************************
+
+==Cria Placar
+=criarplacar		OK
+
+//*****************TESTES SEM CRIAR A RODADA***************
+
+==Pega Vitorias
+=pegavitoria		1	-1
+=pegavitoria		3	-1
+
+
+==Pega Pontos
+=pegapontos		1	0
+=pegapontos		3	-1
+
+
+==Guarda Pontos
+=guardapontos		1	RodadaNaoIniciada
+=guardapontos		3	RodadaNaoIniciada
+
+
+==Guarda Vitorias
+=guardavitorias		1	RodadaNaoIniciada
+=guardavitorias		3	RodadaNaoIniciada
+
+
+==Termina Rodada
+=terminarodada		RodadaNaoIniciada
+
+==Status Rodada
+=statusrodada		0
+
+==Atualiza Valor Rodada
+=atualizarodada		1	RodadaNaoIniciada
+=atualizarodada		3	RodadaNaoIniciada
+
+==Checa Truco
+=checatruco		1	TrucoNaoPossivel
+=checatruco		3	TrucoNaoPossivel
+
+//*********************************************************
+
+==Nova Rodada
+=novarodada		OK
+
+//*****************TESTES COM PLACAR E RODADA**************
+
+==Pega Vitorias
+=pegavitoria		1	0
+=pegavitoria		3	-1
+
+
+==Pega Pontos
+=pegapontos		1	0
+=pegapontos		3	-1
+
+
+==Guarda Pontos
+=guardapontos		1	OK
+=guardapontos		3	ParamIncorreto
+
+
+==Guarda Vitorias
+=guardavitorias		1	OK
+=guardavitorias		3	ParamIncorreto
+
+
+==Status Rodada
+=statusrodada		1
+
+==Atualiza Valor Rodada
+=atualizarodada		1	OK
+=atualizarodada		3	ParamIncorreto
+
+==Checa Truco
+=checatruco		1	TrucoNaoPossivel
+=checatruco		2	OK
+=checatruco		3	ParamIncorreto
+
+==Termina Rodada
+=terminarodada		OK
+
+//*********************************************************
+
+
+

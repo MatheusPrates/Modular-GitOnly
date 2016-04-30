@@ -21,10 +21,10 @@
 #include    <stdio.h>
 #include    <malloc.h>
 
-#include    "TST_Espc.h"
+#include    "TST_ESPC.H"
 
-#include    "Generico.h"
-#include    "LerParm.h"
+#include    "GENERICO.H"
+#include    "LERPARM.H"
 
 #include "BARALHO.h"
 
@@ -64,12 +64,12 @@ Baralho BaralhoDeCartas;
 
             BaralhoDeCartas	 =  BAR_CriarBaralho() ;
 
-			validaBaralho =  TRUE;		//???
+			validaBaralho =  TRUE;
 			
             return TST_CompararPonteiroNulo( 1 , BaralhoDeCartas ,
                "Erro em ponteiro de novo baralho\n."  ) ;
 
-         } /* fim ativa: Testar CriarLista */
+         } /* fim ativa: Testar CriarBaralho */
 		
 
 		 /* Testar DestruirBaralho */

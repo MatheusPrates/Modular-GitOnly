@@ -51,7 +51,7 @@ typedef struct carta Carta;
    
    /***********************************************************************
 *
-*  $FC Função: LIS  &Criar baralho
+*  $FC Função: BAR  &Criar baralho
 *
 *  $ED Descrição da função
 *     Cria um baralho vazio.
@@ -70,7 +70,7 @@ typedef struct carta Carta;
 	
 /***********************************************************************
 *
-*  $FC Função: LIS  &Destruir baralho
+*  $FC Função: BAR  &Destruir baralho
 *
 *  $ED Descrição da função
 *     Destrói o baralho passado como parâmetro.
@@ -85,9 +85,21 @@ typedef struct carta Carta;
 
 	void BAR_DestruirBaralho(Baralho Bar);
 
+/***********************************************************************
+*
+*  $FC Função: BAR  &Embaralha baralho
+*
+*  $ED Descrição da função
+*     Embaralha o baralho passado como parâmetro.
+*
+*  $FV Valor retornado
+*     BAR_CondRetOK    - embaralhou sem problemas  (???)
+*
+***********************************************************************/
+
+	void BAR_Embaralha(Baralho baralho);
 
 
-void BAR_embaralha(Baralho baralho);
 
 
 

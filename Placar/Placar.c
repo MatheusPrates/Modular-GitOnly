@@ -8,7 +8,6 @@ struct placar{
 	int vitorias_e1;
 	int vitorias_e2;
 	int ultimoTruco;
-	Carta* Manilha;
 };
 
 static Placar* placar_jogo=NULL;
@@ -18,25 +17,18 @@ PLA_CondRet PLA_criaPlacar(void){
 	placar_jogo=(Placar*)malloc(sizeof(Placar));
 	if (!placar_jogo)
 		return PLA_CondRetSemMemoria;
-    placar_jogo->Manilha=NULL;
 	placar_jogo->pontos_e1=placar_jogo->pontos_e2=0;
 	return PLA_CondRetOk;
 }
 
-PLA_CondRet PLA_novaRodada(Carta* Manilha){
+PLA_CondRet PLA_novaRodada(void){
 	if(!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
-	if (placar_jogo->Manilha){
-		free(placar_jogo->Manilha);
-		placar_jogo->Manilha=NULL;
-	}
+
 	placar_jogo->vitorias_e1=0;
 	placar_jogo->vitorias_e2=0;
 	placar_jogo->valor_rodada=1;
 	placar_jogo->ultimoTruco=-1;
-	if (!Manilha)
-		return PLA_CondRetParametroIncorreto;
-	placar_jogo->Manilha=Manilha;	
 	rodada=1;
 	return PLA_CondRetOk;
 }
@@ -56,6 +48,8 @@ int PLA_pegaPontos(int equipe){
 PLA_CondRet PLA_guardaPontosEquipe(int equipe){
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
+	if(!rodada)
+		return PLA_CondRetRodadaNaoIniciada;
 	switch(equipe){
 	case 0: placar_jogo->pontos_e1+=placar_jogo->valor_rodada; placar_jogo->pontos_e2+=placar_jogo->valor_rodada; break;
 	case 1: placar_jogo->pontos_e1+=placar_jogo->valor_rodada; break;
@@ -95,14 +89,24 @@ int PLA_StatusRodada(void){
 }
 
 PLA_CondRet PLA_atualizaValorRodada(int equipe){
+<<<<<<< HEAD
+
 	PLA_CondRet CondRet;
+
+=======
+	PLA_CondRet CondRet;
+>>>>>>> add67940cfacc8a20463c8f04487c00cb15f8e40
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
 	if (!rodada)
 		return PLA_CondRetRodadaNaoIniciada;
-	if (equipe!=1 && equipe!=0)
+	if (equipe!=1 && equipe!=2)
 		return PLA_CondRetParametroIncorreto;
+<<<<<<< HEAD
+	CondRet = PLA_checaTruco(equipe);
+=======
      CondRet = PLA_checaTruco(equipe);
+>>>>>>> add67940cfacc8a20463c8f04487c00cb15f8e40
 	if (CondRet == PLA_CondRetOk){
 		placar_jogo->valor_rodada+=3;
 		if (placar_jogo->valor_rodada==4)
@@ -117,6 +121,8 @@ PLA_CondRet PLA_checaTruco(int equipe){
 	  return PLA_CondRetTrucoNaoPossivel;
   if (!rodada)
 	  return PLA_CondRetTrucoNaoPossivel;
+  if (equipe!=1 && equipe!=2)
+		return PLA_CondRetParametroIncorreto;
   if (placar_jogo->pontos_e1==11 || placar_jogo->pontos_e2==11)
 	  return PLA_CondRetTrucoNaoPossivel;
   if (placar_jogo->valor_rodada==12)
