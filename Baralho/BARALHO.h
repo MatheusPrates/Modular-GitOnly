@@ -40,18 +40,19 @@ typedef struct carta Carta;
 *
 ***********************************************************************/
 
-	typedef enum {
+typedef enum {
 
-		BAR_CondRetOK ,
-				/*Concluiu corretamente*/
+	BAR_CondRetOk ,
+	/*Concluiu corretamente*/
+	BAR_CondRetSemMemoria
+	/* Sem memória */
 
-         
 
-   } BAR_tpCondRet ;
-   
-   /***********************************************************************
+} BAR_CondRet ;
+
+/***********************************************************************
 *
-*  $FC Função: BAR  &Criar baralho
+*  $FC Função: LIS  &Criar baralho
 *
 *  $ED Descrição da função
 *     Cria um baralho vazio.
@@ -66,11 +67,11 @@ typedef struct carta Carta;
 *
 ***********************************************************************/
 
-	Baralho BAR_CriarBaralho();
-	
+BAR_CondRet BAR_CriarBaralho();
+
 /***********************************************************************
 *
-*  $FC Função: BAR  &Destruir baralho
+*  $FC Função: LIS  &Destruir baralho
 *
 *  $ED Descrição da função
 *     Destrói o baralho passado como parâmetro.
@@ -83,24 +84,12 @@ typedef struct carta Carta;
 *
 ***********************************************************************/
 
-	void BAR_DestruirBaralho(Baralho Bar);
+void BAR_DestruirBaralho(void);
 
-/***********************************************************************
-*
-*  $FC Função: BAR  &Embaralha baralho
-*
-*  $ED Descrição da função
-*     Embaralha o baralho passado como parâmetro.
-*
-*  $FV Valor retornado
-*     BAR_CondRetOK    - embaralhou sem problemas  (???)
-*
-***********************************************************************/
-
-	void BAR_Embaralha(Baralho baralho);
+BAR_CondRet BAR_embaralha(void); // Obs: Não pode falhar, porque não tem como não conseguir excluir o baralho e suas cartas.
 
 
-
+Carta* BAR_sacaCarta(void); // Saca uma carta, retornando o seu endereço, ou NULL, caso não tenha cartas no baralho ou não tenha um baralho criado.
 
 
 
