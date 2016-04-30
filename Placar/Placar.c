@@ -56,7 +56,8 @@ PLA_CondRet PLA_guardaPontosEquipe(int equipe){
 	case 2: placar_jogo->pontos_e2+=placar_jogo->valor_rodada; break;
 	default: return PLA_CondRetParametroIncorreto;
 	}
-	return PLA_CondRetOk;
+	
+	return PLA_terminaRodada();
 }
 
 PLA_CondRet PLA_guardaVitoriasEquipe(int equipe){
@@ -89,7 +90,6 @@ int PLA_StatusRodada(void){
 }
 
 PLA_CondRet PLA_atualizaValorRodada(int equipe){
-	PLA_CondRet CondRet;
 	PLA_CondRet CondRet;
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;

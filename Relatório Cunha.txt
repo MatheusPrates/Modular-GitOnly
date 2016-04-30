@@ -5,3 +5,5 @@
 [13/04/2016 - 19:13] Realizado modificações no docx com as regras do jogo e no docx com as especificações
 					 de requesitos.
 [21/04/2016 - 15:57] Começando baralho.h. Primeira função feita, junto do script. Tudo testado e funcionando.
+[30/04/2016 - 16:37] TESTPLA.c e TestePlacar.script feitos, foram feitos testes para as condições de retorno 
+					 e apesar de alguns erros tudo foi corrigido.

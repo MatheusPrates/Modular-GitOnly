@@ -9,16 +9,17 @@
 
 #include    "Placar.h"
 
-static const char CRIAR_PLACAR_CMD[ ] = "=criarplacar" ;
-static const char PEGA_VITORIA_CMD[ ] = "=pegavitoria" ;
-static const char PEGA_PONTOS_CMD[ ]  = "=pegapontos" ;
-static const char GUARDA_PONTOS_CMD[ ]  = "=guardapontos" ;
-static const char GUARDA_VITORIAS_CMD[ ]  = "=guardavitorias" ;
-static const char TERMINA_RODADA_CMD[ ]  = "=terminarodada" ;
-static const char STATUS_RODADA_CMD[ ]  = "=statusrodada" ;
-static const char ATUALIZA_RODADA_CMD[ ]  = "=atualizarodada" ;
-static const char CHECA_TRUCO_CMD[ ]  = "=checatruco" ;
-static const char NOVA_RODADA_CMD[ ]  = "=novarodada" ;
+static const char CRIAR_PLACAR_CMD[ ]		 = "=criarplacar" ;
+static const char PEGA_VITORIA_CMD[ ]		 = "=pegavitoria" ;
+static const char PEGA_PONTOS_CMD[ ]		 = "=pegapontos" ;
+static const char GUARDA_PONTOS_CMD[ ]		 = "=guardapontos" ;
+static const char GUARDA_VITORIAS_CMD[ ]	 = "=guardavitorias" ;
+static const char TERMINA_RODADA_CMD[ ]		 = "=terminarodada" ;
+static const char STATUS_RODADA_CMD[ ]		 = "=statusrodada" ;
+static const char ATUALIZA_RODADA_CMD[ ]	 = "=atualizarodada" ;
+static const char CHECA_TRUCO_CMD[ ]		 = "=checatruco" ;
+static const char NOVA_RODADA_CMD[ ]		 = "=novarodada" ;
+static const char DESTRUIR_PLACAR_CMD[ ]	 = "=destruirplacar" ;
 
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
@@ -197,6 +198,22 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
 	} /* fim ativa: Testar Nova Rodada*/
+	else if ( strcmp( ComandoTeste , DESTRUIR_PLACAR_CMD ) == 0 )
+         {
+
+            numLidos = LER_LerParametros( "i" ,
+                               &CondRetEsp ) ;
+
+            if ( ( numLidos != 1 ))
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            PLA_DestruirPlacar();
+
+            return TST_CondRetOK ;
+
+         } /* fim ativa: Testar Destruir placar */
 
 
 
