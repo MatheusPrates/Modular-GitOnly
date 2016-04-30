@@ -89,24 +89,16 @@ int PLA_StatusRodada(void){
 }
 
 PLA_CondRet PLA_atualizaValorRodada(int equipe){
-<<<<<<< HEAD
-
 	PLA_CondRet CondRet;
-
-=======
 	PLA_CondRet CondRet;
->>>>>>> add67940cfacc8a20463c8f04487c00cb15f8e40
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
 	if (!rodada)
 		return PLA_CondRetRodadaNaoIniciada;
 	if (equipe!=1 && equipe!=2)
 		return PLA_CondRetParametroIncorreto;
-<<<<<<< HEAD
 	CondRet = PLA_checaTruco(equipe);
-=======
-     CondRet = PLA_checaTruco(equipe);
->>>>>>> add67940cfacc8a20463c8f04487c00cb15f8e40
+	CondRet = PLA_checaTruco(equipe);
 	if (CondRet == PLA_CondRetOk){
 		placar_jogo->valor_rodada+=3;
 		if (placar_jogo->valor_rodada==4)
@@ -117,22 +109,24 @@ PLA_CondRet PLA_atualizaValorRodada(int equipe){
 }
 
 PLA_CondRet PLA_checaTruco(int equipe){
-  if (!placar_jogo)
-	  return PLA_CondRetTrucoNaoPossivel;
-  if (!rodada)
-	  return PLA_CondRetTrucoNaoPossivel;
-  if (equipe!=1 && equipe!=2)
+	if (!placar_jogo)
+		return PLA_CondRetTrucoNaoPossivel;
+	if (!rodada)
+		return PLA_CondRetTrucoNaoPossivel;
+	if (equipe!=1 && equipe!=2)
 		return PLA_CondRetParametroIncorreto;
-  if (placar_jogo->pontos_e1==11 || placar_jogo->pontos_e2==11)
-	  return PLA_CondRetTrucoNaoPossivel;
-  if (placar_jogo->valor_rodada==12)
-	  return PLA_CondRetTrucoNaoPossivel;
-  if (placar_jogo->ultimoTruco==equipe)
-	  return PLA_CondRetTrucoNaoPossivel;
-  return PLA_CondRetOk;
+	if (placar_jogo->pontos_e1==11 || placar_jogo->pontos_e2==11)
+		return PLA_CondRetTrucoNaoPossivel;
+	if (placar_jogo->valor_rodada==12)
+		return PLA_CondRetTrucoNaoPossivel;
+	if (placar_jogo->ultimoTruco==equipe)
+		return PLA_CondRetTrucoNaoPossivel;
+	return PLA_CondRetOk;
 }
 
 void PLA_DestruirPlacar(void){
-	free(placar_jogo);
+	if (placar_jogo)
+		free(placar_jogo);
+	rodada=0;
 	placar_jogo=NULL;
 }

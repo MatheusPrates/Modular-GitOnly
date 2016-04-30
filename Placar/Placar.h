@@ -41,5 +41,5 @@ PLA_CondRet PLA_checaTruco(int equipe); /* Recebe uma equipe e verifica se o tru
 										A rodada não valha 12 pontos;
 										A última equipe a pedir truco não seja a equipe pedindo truco agora;*/
 
-void PLA_DestruirPlacar(void); /* Destroi o placar. Não tem previsão de erro. */
+void PLA_DestruirPlacar(void); /* Destroi o placar, considerando um fim de jogo. Não tem previsão de erro. */
 
