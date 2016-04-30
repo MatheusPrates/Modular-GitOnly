@@ -7,7 +7,8 @@ typedef enum{
 	PLA_CondRetSemMemoria, //Não conseguiu criar o placar.
 	PLA_CondRetPlacarNaoExiste, //O placar não está criado.
 	PLA_CondRetParametroIncorreto, //O parâmetro enviado não corresponde com o que a função pede, em termos de faixa de valores.
-	PLA_CondRetRodadaNaoIniciada // A rodada não foi iniciada. Portanto não tem manilha, não tem pontos nem vitórias.
+	PLA_CondRetRodadaNaoIniciada, // A rodada não foi iniciada. Portanto não tem manilha, não tem pontos nem vitórias.
+	PLA_CondRetTrucoNaoPossivel // Não é possível pedir
 }PLA_CondRet;
 
 PLA_CondRet PLA_criaPlacar(void); //Cria um placar. Setta os pontos das equipes em 0. Retorna PLA_CondRetSemMemoria ou PLA_CondRetOk.
@@ -26,5 +27,15 @@ PLA_CondRet PLA_terminaRodada(void); /* Termina a rodada corrente, para o placar
 									 */
 int PLA_StatusRodada(void); /* Devolve o status da rodada atual. 1 se estiver corrente, 0 se não tiver uma rodada corrente ou -1 se o placar estiver criado.
 							*/
-PLA_CondRet PLA_atualizaValorRodada(int equipe) /* Recebe a equipe que está pedindo para atualizar o valor da rodada. 1 ou 2 para a equipe 1 ou 2.
-										   Aumenta o valor da rodada na ordem 1-3-6-9-12. 
+PLA_CondRet PLA_atualizaValorRodada(int equipe); /* Recebe a equipe que está pedindo para atualizar o valor da rodada. 1 ou 2 para a equipe 1 ou 2.
+										   Aumenta o valor da rodada na ordem 1-3-6-9-12. Utiliza a PLA_checaTruco.
+										   Retorna PLA_CondRetPlacarNaoExiste, PLA_CondRetRodadaNaoIniciada, PLA_CondRetParametroIncorreto,
+										   PLA_CondRetTrucoNaoPossivel ou PLA_CondRetOk*/
+
+PLA_CondRet PLA_checaTruco(int equipe); /* Recebe uma equipe e verifica se o truco é possível de ser pedido ou não.
+										O truco so é possível caso todas as condições abaixo forem cumpridas:
+										Caso o placar tenha sido criado;
+										Uma rodada esteja corrente;
+										Nenhuma das equipes esteja em Mão-De-Onze;
+										A rodada não valha 12 pontos;
+										A última equipe a pedir truco não seja a equipe pedindo truco agora;

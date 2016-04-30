@@ -10,8 +10,8 @@ struct placar{
 	int ultimoTruco;
 	Carta* Manilha;
 };
-typedef Placar Carta;
-static Placar* placar_jogo;
+
+static Placar* placar_jogo=NULL;
 static int rodada=0;
 
 PLA_CondRet PLA_criaPlacar(void){
@@ -27,7 +27,7 @@ PLA_CondRet PLA_novaRodada(Carta* Manilha){
 	if(!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
 	if (placar_jogo->Manilha){
-		BAR_destroiCarta(placar_jogo->Manilha);
+		free(placar_jogo->Manilha);
 		placar_jogo->Manilha=NULL;
 	}
 	placar_jogo->vitorias_e1=0;
@@ -94,11 +94,33 @@ int PLA_StatusRodada(void){
 	return rodada;
 }
 
-PLA_CondRet PLA_atualizaValorRodada(void){
+PLA_CondRet PLA_atualizaValorRodada(int equipe){
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
 	if (!rodada)
 		return PLA_CondRetRodadaNaoIniciada;
-	/*incompleto*/
+	if (equipe!=1 && equipe!=0)
+		return PLA_CondRetParametroIncorreto;
+	PLA_CondRet CondRet = PLA_checaTruco(equipe);
+	if (CondRet == PLA_CondRetOk){
+		placar_jogo->valor_rodada+=3;
+		if (placar_jogo->valor_rodada==4)
+			placar_jogo->valor_rodada--;
+		placar_jogo->ultimoTruco=equipe;
+	}
+	return CondRet;
 }
 
+PLA_CondRet PLA_checaTruco(int equipe){
+  if (!placar_jogo)
+	  return PLA_CondRetTrucoNaoPossivel;
+  if (!rodada)
+	  return PLA_CondRetTrucoNaoPossivel;
+  if (placar_jogo->pontos_e1==11 || placar_jogo->pontos_e2==11)
+	  return PLA_CondRetTrucoNaoPossivel;
+  if (placar_jogo->valor_rodada==12)
+	  return PLA_CondRetTrucoNaoPossivel;
+  if (placar_jogo->ultimoTruco==equipe)
+	  return PLA_CondRetTrucoNaoPossivel;
+  return PLA_CondRetOk;
+}
