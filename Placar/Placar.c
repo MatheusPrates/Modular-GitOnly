@@ -131,3 +131,8 @@ PLA_CondRet PLA_checaTruco(int equipe){
 	  return PLA_CondRetTrucoNaoPossivel;
   return PLA_CondRetOk;
 }
+
+void PLA_DestruirPlacar(void){
+	free(placar_jogo);
+	placar_jogo=NULL;
+}
