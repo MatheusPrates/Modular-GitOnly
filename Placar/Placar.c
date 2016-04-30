@@ -95,13 +95,14 @@ int PLA_StatusRodada(void){
 }
 
 PLA_CondRet PLA_atualizaValorRodada(int equipe){
+	PLA_CondRet CondRet;
 	if (!placar_jogo)
 		return PLA_CondRetPlacarNaoExiste;
 	if (!rodada)
 		return PLA_CondRetRodadaNaoIniciada;
 	if (equipe!=1 && equipe!=0)
 		return PLA_CondRetParametroIncorreto;
-	PLA_CondRet CondRet = PLA_checaTruco(equipe);
+     CondRet = PLA_checaTruco(equipe);
 	if (CondRet == PLA_CondRetOk){
 		placar_jogo->valor_rodada+=3;
 		if (placar_jogo->valor_rodada==4)

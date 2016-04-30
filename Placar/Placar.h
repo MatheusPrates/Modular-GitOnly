@@ -1,6 +1,7 @@
-
+#include "BARALHO.h"
 
 typedef struct placar Placar;
+
 
 typedef enum{
 	PLA_CondRetOk, //Quando tudo ocorreu bem.
@@ -38,4 +39,4 @@ PLA_CondRet PLA_checaTruco(int equipe); /* Recebe uma equipe e verifica se o tru
 										Uma rodada esteja corrente;
 										Nenhuma das equipes esteja em Mão-De-Onze;
 										A rodada não valha 12 pontos;
-										A última equipe a pedir truco não seja a equipe pedindo truco agora;
+										A última equipe a pedir truco não seja a equipe pedindo truco agora; */
