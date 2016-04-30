@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 *  $MCI Módulo de implementação: Módulo baralho
 *
 *  Arquivo gerado:              BARALHO.C
@@ -38,7 +38,7 @@
 *
 ***********************************************************************/	
 
-typedef struct carta {
+struct carta {
 
 	char valor;
 	/*Valor da carta*/
@@ -46,7 +46,7 @@ typedef struct carta {
 	char naipe;
 	/*Naipe da carta (representado pela primeira letra do naipe)*/
 
-} Carta;
+};
 
 
 Baralho preparado; //Um baralho auxiliar para poder embaralhar decentemente. É criado e destruido cada vez que o baralho precisar ser embaralhado.

@@ -4,3 +4,4 @@
 [21/04/2016 - 15:57] Começando baralho.h. Primeira função feita, junto do script. Tudo testado e funcionando.
 [22/04/2016 - 20:46] Função de embaralhar feita e funcionando. Gerando um baralho totalmente randômico.
 Falta script e teste da embaralha.
+[30/04/2016 - 12:01] Toda a Placar.c foi feita, com suas respectivas funções. Falta script e teste do placar.
