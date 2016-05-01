@@ -50,57 +50,11 @@ Baralho BaralhoDeCartas=NULL; // O baralho que efetivamente vai ser utilizado no
 
 Baralho preparado=NULL; //Um baralho auxiliar para poder embaralhar decentemente. É criado e destruido cada vez que o baralho precisar ser embaralhado.
 
-static Carta* cria_carta(char valor,char naipe)
-{
-	Carta* novo=(Carta*)malloc(sizeof(Carta));
-	if(!novo)
-		return NULL;
-	novo->valor=valor;
-	novo->naipe=naipe;
-	return novo;
-}
-
-
-static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet){
-	switch(CondRet){
-	case LIS_CondRetOK: return BAR_CondRetOk;
-	case LIS_CondRetFaltouMemoria: return BAR_CondRetSemMemoria;
-	default: return BAR_CondRetOk;
-	}
-
-}
-
-static BAR_CondRet prepara(void)
-{
-	LIS_tpCondRet CondRet;
-	Carta* uma_carta;
-	int i,d;
-	char tnaipe,tvalor;
-	char valor[]={'3','2','A','K','J','Q','7','6','5','4'};
-	char naipe[]={'O','E','C','P'};
-	preparado=LIS_CriarLista(NULL);
-	if (!preparado)
-		return BAR_CondRetSemMemoria;
-	for (i=0;i<40;i++)
-	{
-		d=i;
-		if (i>=10)
-			d%=10;
-		tvalor = valor[d];
-		d=i/10;
-		tnaipe=naipe[d];
-		uma_carta = cria_carta(tvalor,tnaipe);
-		if(uma_carta)
-		{
-			CondRet = LIS_InserirElementoAntes(preparado,uma_carta);
-			if (CondRet==LIS_CondRetFaltouMemoria)
-				return Transforma_CondRet(CondRet);
-		}
-	}
-	return Transforma_CondRet(CondRet);
-
-}
 /***** Protótipos das funções encapuladas no módulo *****/
+
+static Carta* cria_carta(char valor,char naipe);
+static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet);
+static BAR_CondRet prepara(void);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -116,6 +70,11 @@ BAR_CondRet BAR_CriarBaralho()
 		return BAR_CondRetSemMemoria;
 	return BAR_CondRetOk ;	
 }
+
+/***************************************************************************
+*
+*  Função: BAR  &Embaralha
+***************************************************************************/
 
 BAR_CondRet BAR_embaralha(void)
 {
@@ -162,6 +121,10 @@ void BAR_DestruirBaralho(void)
 	LIS_DestruirLista(BaralhoDeCartas);
 	BaralhoDeCartas=NULL;
 }
+/***************************************************************************
+*
+*  Função: BAR  &Saca carta
+***************************************************************************/
 
 Carta* BAR_sacaCarta(void){
 	Carta* carta;
@@ -172,5 +135,97 @@ Carta* BAR_sacaCarta(void){
 	LIS_ExcluirElemento(BaralhoDeCartas);
 	return carta;
 }
+/*****  Código das funções encapsuladas no módulo  *****/
 
+/***********************************************************************
+*
+*  $FC Função: BAR  -Cria Carta
+*
+*  $ED Descrição da função
+*     Cria uma carta que posteriormente será inserida no baralho.
+*     
+*  $FV Valor retornado
+*	Se nao conseguir alocar memória retorna um ponteiro NULL.
+*	Caso contrário, retorna uma carta.
+*
+***********************************************************************/
 
+static Carta* cria_carta(char valor,char naipe)
+{
+	Carta* novo=(Carta*)malloc(sizeof(Carta));
+	if(!novo)
+		return NULL;
+	novo->valor=valor;
+	novo->naipe=naipe;
+	return novo;
+}
+
+/***********************************************************************
+*
+*  $FC Função: BAR  Transforma condição de retorno
+*
+*  $ED Descrição da função
+*     Transforma  as condições de retorno de Lista para  as condições 
+*		 de retorno de Baralho.
+*     
+*  $FV Valor retornado
+*	BAR_CondRetOK- Caso receba LIS_CondRetOK ou caia no caso default.
+*	BAR_CondRetSemMemoria-Caso receba LIS_CondRetFaltouMemoria 
+*
+***********************************************************************/
+
+static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet){
+	switch(CondRet){
+	case LIS_CondRetOK: return BAR_CondRetOk;
+	case LIS_CondRetFaltouMemoria: return BAR_CondRetSemMemoria;
+	default: return BAR_CondRetOk;
+	}
+
+}
+
+/***********************************************************************
+*
+*  $FC Função: BAR  Prepara Baralho
+*
+*  $ED Descrição da função
+*     Coloca todas as cartas presentes do jogo no baralho auxiliar.
+*     
+*  $FV Valor retornado
+*	BAR_CondRetOK- Caso consiga colocar todas as cartas no baralho.
+*	BAR_CondRetSemMemoria-Caso falte memoria na criação do baralho auxiliar
+*						  ou tenha problemas inserindo uma carta nele.
+*
+***********************************************************************/
+
+static BAR_CondRet prepara(void)
+{
+	LIS_tpCondRet CondRet;
+	Carta* uma_carta;
+	int i,d;
+	char tnaipe,tvalor;
+	char valor[]={'3','2','A','K','J','Q','7','6','5','4'};
+	char naipe[]={'O','E','C','P'};
+	preparado=LIS_CriarLista(NULL);
+	if (!preparado)
+		return BAR_CondRetSemMemoria;
+	for (i=0;i<40;i++)
+	{
+		d=i;
+		if (i>=10)
+			d%=10;
+		tvalor = valor[d];
+		d=i/10;
+		tnaipe=naipe[d];
+		uma_carta = cria_carta(tvalor,tnaipe);
+		if(uma_carta)
+		{
+			CondRet = LIS_InserirElementoAntes(preparado,uma_carta);
+			if (CondRet==LIS_CondRetFaltouMemoria)
+				return Transforma_CondRet(CondRet);
+		}
+	}
+	return Transforma_CondRet(CondRet);
+
+}
+
+/************************************ Fim do módulo de implementação: BAR  Baralho  **********************************************************************/
