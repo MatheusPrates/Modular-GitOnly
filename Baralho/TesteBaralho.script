@@ -5,12 +5,59 @@
 //
 
 //== Inicializar valores
+=declararparm OK 	  	int 0
+=declararparm SemMemoria  	int 1
 
+=declararparm   pNaoNULL        int  0
+=declararparm   pNULL    	int  1
 
-== Criar o baralho 
-=criarbaralho	 
+//*********************TESTES SEM CRIAR E DESTRUIR O BARALHO*********************************
 
-== Destruir o baralho
-=destruirbaralho
+== Embaralha
 
-// fim
+=embaralha SemMemoria
+
+==sacaCarta
+
+=saca_carta pNULL
+
+//************************************************************************************************************************************************************************************************************
+
+//*******************************TESTE COM O BARALHO CRIADO E ZERO CARTAS NELE*****************************************************************************************
+
+==Cria Baralho
+
+=cria_baralho OK
+
+==Embaralha
+
+=embaralha SemMemoria
+		
+==sacaCarta
+
+=saca_carta pNULL 
+
+==Destruir Baralho
+
+==destruir_baralho OK
+//***************************************************************************************************************************************************************************************************************
+
+//*******************************TESTE COM O BARALHO CRIADO,PELO MENOS UMA CARTA NELE**********************************************************************************
+
+==Cria Baralho
+
+=cria_baralho OK
+
+==Embaralha
+
+=embaralha OK
+
+==sacaCarta
+
+=saca_carta pNaoNULL
+
+==Destruir Baralho
+
+==destruir_baralho OK
+
+//***************************************************************************************************************************************************************************************************************

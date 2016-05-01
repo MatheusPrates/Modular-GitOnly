@@ -1,98 +1,83 @@
-/***************************************************************************
-*  $MCI Módulo de implementação: TBAR Teste baralho
-*
-*  Arquivo gerado:              TESTBAR.c
-*  Letras identificadoras:      TBAR
-*
-*  Nome da base de software:    -
-*  Arquivo da base de software: -
-*
-*  Projeto: INF 1301 / 1628 Truco
-*  Gestor:  -
-*  Autores: Matheus³
-*
-*  $HA Histórico de evolução:
-*     Versão  Autor    		Data     		Observações 
-*     1       Matheus³   21/abr/2016 	início desenvolvimento
-*
-***************************************************************************/
-
 #include    <string.h>
 #include    <stdio.h>
 #include    <malloc.h>
+#include    "TST_ESPC.h"
+#include    "Generico.h"
+#include    "LerParm.h"
+#include    "Baralho.h"
 
-#include    "TST_ESPC.H"
+static const char CRIAR_BARALHO_CMD[]	 = "=cria_baralho";
+static const char EMBARALHA_CMD[]		 = "=embaralha";
+static const char SACA_CARTA_CMD[]	     = "=saca_carta";
+static const char DESTRUIR_BARALHO_CMD[] = "=destruir_baralho";
 
-#include    "GENERICO.H"
-#include    "LERPARM.H"
+TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+{
+	int numLidos=-1,CondRetEsp=-1,retornocarta=-1;
+	void *precebido;
+	BAR_CondRet CondRet;
 
-#include "BARALHO.h"
+	if(strcmp(ComandoTeste,CRIAR_BARALHO_CMD)==0)
+	{
+		numLidos=LER_LerParametros("i",&CondRetEsp);
 
-static const char CRIAR_BARALHO_CMD[] = "=criarbaralho";
-static const char DESTRUIR_BARALHO_CMD[] = "=destruirbaralho";
+		if(numLidos!=1)
+		{
+			return TST_CondRetParm ;
+		}
 
+		CondRet=BAR_CriarBaralho();
 
-#define TRUE  1
-#define FALSE 0
+		return TST_CompararInt( CondRetEsp , CondRet , "Condicao de retorno errada.");
+	}
+	else if(strcmp(ComandoTeste,EMBARALHA_CMD)==0)
+	{
+		numLidos=LER_LerParametros("i",&CondRetEsp);
 
-#define VAZIO     0
-#define NAO_VAZIO 1
+		if(numLidos!=1)
+		{
+			return TST_CondRetParm;
+		}
 
-Baralho BaralhoDeCartas;
+		CondRet=BAR_embaralha();
 
+		return TST_CompararInt( CondRetEsp , CondRet , "Condicao de retorno errada.");
+	}
+	else if(strcmp(ComandoTeste,SACA_CARTA_CMD)==0)
+	{
+		numLidos=LER_LerParametros("i",&CondRetEsp);
 
-	 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
-   {
-		int inxLista  = -1 ,
-			numLidos   = -1 ,
-			validaBaralho = FALSE;			/*variavel para saber se o baralho pode */
+		if(numLidos!=1)
+		{
+			return TST_CondRetParm;
+		}
 
-      
-      
-   
-		/* Testar CriarBaralho */
-   
-		 if ( strcmp( ComandoTeste , CRIAR_BARALHO_CMD ) == 0 )
-         {
+		precebido=BAR_sacaCarta();
 
-            numLidos = LER_LerParametros("") ;
-            if ( ( numLidos != 0 )			/*se o numero de parametros nao e zero ou caso a valida baralho seja TRUE*/
-              || validaBaralho==TRUE)
-            {
-               return TST_CondRetParm ;
-            } /* if */
+		if(precebido==NULL)
+		{
+			retornocarta=1;
+		}
+		else
+		{
+			retornocarta=0;
+		}
 
-            BaralhoDeCartas	 =  BAR_CriarBaralho() ;
+		return TST_CompararInt( CondRetEsp , retornocarta , "Condicao de retorno errada.");
+	}
+	else if(strcmp(ComandoTeste,DESTRUIR_BARALHO_CMD)==0)
+	{
+		numLidos=LER_LerParametros("i",&CondRetEsp);
 
-			validaBaralho =  TRUE;
-			
-            return TST_CompararPonteiroNulo( 1 , BaralhoDeCartas ,
-               "Erro em ponteiro de novo baralho\n."  ) ;
+		if(numLidos!=1)
+		{
+			return TST_CondRetParm;
+		}
 
-         } /* fim ativa: Testar CriarBaralho */
-		
-
-		 /* Testar DestruirBaralho */
-
-		 else if ( strcmp( ComandoTeste , DESTRUIR_BARALHO_CMD ) == 0 )
-         {
-
-            numLidos = LER_LerParametros("") ;
-
-            if ( ( numLidos != 0 )
-              || (!validaBaralho))       //??????
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-            BAR_DestruirBaralho(BaralhoDeCartas) ;
-            BaralhoDeCartas = NULL ;
-
+			BAR_DestruirBaralho();
 
             return TST_CondRetOK ;
+	}
 
-         } /* fim ativa: Testar Destruir baralho */
-	}	 
-		 
-
-	 // Testando aqui.
+	return TST_CondRetNaoConhec;
+}
