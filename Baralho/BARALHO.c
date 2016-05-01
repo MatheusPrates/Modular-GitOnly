@@ -125,7 +125,6 @@ BAR_CondRet BAR_embaralha(void)
 	int i,a;
 	srand(time(NULL));
 	BarCondRet = prepara();
-	BaralhoDeCartas=LIS_CriarLista(NULL);
 	if (!BaralhoDeCartas ||BarCondRet==BAR_CondRetSemMemoria)
 		return BAR_CondRetSemMemoria;
 	for (i=39;i>=0;i--)

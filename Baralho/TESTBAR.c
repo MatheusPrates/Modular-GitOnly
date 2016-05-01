@@ -14,7 +14,7 @@ static const char DESTRUIR_BARALHO_CMD[] = "=destruir_baralho";
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 {
 	int numLidos=-1,CondRetEsp=-1,retornocarta=-1;
-	void *precebido;
+	Carta* precebido;
 	BAR_CondRet CondRet;
 
 	if(strcmp(ComandoTeste,CRIAR_BARALHO_CMD)==0)
@@ -53,17 +53,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 		}
 
 		precebido=BAR_sacaCarta();
-
-		if(precebido==NULL)
-		{
-			retornocarta=1;
-		}
-		else
-		{
-			retornocarta=0;
-		}
-
-		return TST_CompararInt( CondRetEsp , retornocarta , "Condicao de retorno errada.");
+		if (CondRetEsp==0)
+		return TST_CompararPonteiroNulo( 0 , precebido , "Valor nao deveria existir.");
+		if (precebido==NULL)
+			return TST_CompararPonteiroNulo( 1 , precebido ,
+                         "Carta deveria existir." ) ;
+		return TST_CondRetOK;
 	}
 	else if(strcmp(ComandoTeste,DESTRUIR_BARALHO_CMD)==0)
 	{
