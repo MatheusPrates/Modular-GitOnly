@@ -7,3 +7,7 @@
 [21/04/2016 - 15:57] Começando baralho.h. Primeira função feita, junto do script. Tudo testado e funcionando.
 [30/04/2016 - 16:37] TESTPLA.c e TestePlacar.script feitos, foram feitos testes para as condições de retorno 
 					 e apesar de alguns erros tudo foi corrigido.
+[05/05/2016 - 19:00] Terminada a PLACAR.c e a PLACAR.h, especificando todas as funções.
+[08/05/2016 - 20:40] Alterada a TESTLIS.c e o TesteLista.script, foram adicionados mais testes ao script e
+					 na TESTLIS.c foi adicionado o teste para a funcao de procurar elemento e foi adicionado
+					 condições de retorno nas funções que nnão tinham.
