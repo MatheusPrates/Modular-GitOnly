@@ -1,30 +1,46 @@
-﻿// Script:    TesteLista.script
+﻿//Script: TesteBaralho.script
 // Autor:     Matheus Prates, Matheus Suknaic e Matheus Cunha
 // Data:      23/abr/2016
 // Propósito: Testar superficialmente o módulo baralho
 //
 
 == Inicializar valores
-=declararparm     OK 	  	    int 0
-=declararparm     SemMemoria  	int 1
+=declararparm     OK 	  	    int  0
+=declararparm     SemMemoria        int  1
+=declararparm	  JaExiste 	    int  2
 
-=declararparm     pNULL      int  0
+=declararparm     pNULL      	    int  0
 =declararparm     pNaoNULL    	    int  1
 
+=declararparm	  CartaCerta	    int 0
 //******TESTES SEM CRIAR E DESTRUIR O BARALHO*************
 
 == Embaralha
 
 =embaralha SemMemoria
 
-==sacaCarta
+==SacaCarta
 
-=saca_carta pNULL
+=sacacarta pNULL 
 
+==DefineManilha
+
+=definemanilha pNULL ' '
+
+==RetornaValorCarta
+
+=retornavalorcarta pNULL ' '
+
+==DestroiCarta
+
+=destroicarta pNULL OK
+
+//***TESTE COM BARALHO CRIADO E ZERO CARTAS NELE,SENDO A CARTA "TIRADA"***
+//***PASSADA PARA A MANILHA E A DESTROI CARTA***
 
 ==Cria Baralho
 
-=cria_baralho OK
+=criabaralho OK
 
 ==Embaralha
 
@@ -32,18 +48,31 @@
 		
 ==sacaCarta
 
-=saca_carta pNaoNULL
+=sacacarta pNULL
+
+==DefineManilha
+
+=definemanilha pNULL 0
+
+==RetornaValorCarta
+
+=retornavalorcarta pNULL 0
+
+==DestroiCarta
+
+=destroicarta pNULL OK
 
 ==Destruir Baralho
 
-=destruir_baralho OK
+=destruirbaralho OK
 //*******************************
 
-//********TESTE COM O BARALHO CRIADO,PELO MENOS UMA CARTA NELE***************
+//***TESTE COM O BARALHO CRIADO,PELO MENOS UMA CARTA NELE,SENDO A CARTA TIRADA
+//***PASSADA PARA A MANILHA E A DESTROI CARTA***
 
 ==Cria Baralho
 
-=cria_baralho OK
+=criabaralho OK
 
 ==Embaralha
 
@@ -51,10 +80,38 @@
 
 ==sacaCarta
 
-=saca_carta pNaoNULL
+=sacacarta pNaoNULL
+
+==DefineManilha
+
+=definemanilha pNaoNULL CartaCerta
+ 
+==RetornaValorCarta
+
+=retornavalorcarta pNaoNULL CartaCerta
+
+==DestroiCarta
+
+=destroicarta pNULL OK
 
 ==Destruir Baralho
 
-=destruir_baralho OK
+=destruirbaralho OK
 
-//*************************************************************
+//*****************************************************************
+
+//TESTE TENTANDO CRIAR DOIS BARALHOS
+
+==Cria Baralho
+
+=criabaralho OK
+
+==Cria Baralho
+
+=criabaralho JaExiste
+
+==Destruir Baralho
+
+=destruirbaralho OK
+
+//******************************************************************

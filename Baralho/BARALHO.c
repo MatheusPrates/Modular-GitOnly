@@ -18,13 +18,16 @@
 
 #include <malloc.h>
 #include <stdio.h>
-
-#include <assert.h>
-
 #include <stdlib.h>
 #include <time.h>
 
 #include "BARALHO.h"
+
+#ifndef ASSERTIVA_BARALHO
+#define ASSERTIVA_BARALHO
+#define MAX_CARTAS 40
+#define MAX_VALORES 10
+#endif
 
 /***********************************************************************
 *
@@ -46,15 +49,17 @@ struct carta {
 
 };
 
-Baralho BaralhoDeCartas=NULL; // O baralho que efetivamente vai ser utilizado no jogo.
+static Baralho BaralhoDeCartas=NULL; // O baralho que efetivamente vai ser utilizado no jogo.
 
-Baralho preparado=NULL; //Um baralho auxiliar para poder embaralhar decentemente. É criado e destruido cada vez que o baralho precisar ser embaralhado.
+static Baralho preparado=NULL; //Um baralho auxiliar para poder embaralhar decentemente. É criado e destruido cada vez que o baralho precisar ser embaralhado.
+static char valor[]={'4','5','6','7','Q','J','K','A','2','3'};
+static char naipe[]={'O','E','C','P'};
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-static Carta* cria_carta(char valor,char naipe);
-static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet);
-static BAR_CondRet prepara(void);
+static Carta* criaCarta(char valor,char naipe);
+static BAR_CondRet TransformarCondRet(LIS_tpCondRet CondRet);
+static BAR_CondRet Preparar(void);
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -65,8 +70,10 @@ static BAR_CondRet prepara(void);
 
 BAR_CondRet BAR_CriarBaralho()
 {
+	if (BaralhoDeCartas!=NULL)
+		return BAR_CondRetBaralhoJaExiste;
 	BaralhoDeCartas = LIS_CriarLista(NULL);
-	if (!BaralhoDeCartas)
+	if (BaralhoDeCartas==NULL)
 		return BAR_CondRetSemMemoria;
 	return BAR_CondRetOk ;	
 }
@@ -76,17 +83,17 @@ BAR_CondRet BAR_CriarBaralho()
 *  Função: BAR  &Embaralha
 ***************************************************************************/
 
-BAR_CondRet BAR_embaralha(void)
+BAR_CondRet BAR_Embaralhar(void)
 {
 	Carta* carta;
 	LIS_tpCondRet CondRet;
 	BAR_CondRet BarCondRet;
 	int i,a;
 	srand(time(NULL));
-	BarCondRet = prepara();
-	if (!BaralhoDeCartas ||BarCondRet==BAR_CondRetSemMemoria)
+	BarCondRet = Preparar();
+	if (BaralhoDeCartas==NULL ||BarCondRet==BAR_CondRetSemMemoria)
 		return BAR_CondRetSemMemoria;
-	for (i=39;i>=0;i--)
+	for (i=MAX_CARTAS-1;i>=0;i--)
 	{
 		a=rand()/ (RAND_MAX + 1.0) * (i+1);
 		IrInicioLista(preparado);
@@ -94,7 +101,7 @@ BAR_CondRet BAR_embaralha(void)
 		carta=(Carta*)LIS_ObterValor(preparado);
 		LIS_ExcluirElemento(preparado);
 		CondRet = LIS_InserirElementoAntes(BaralhoDeCartas,carta);
-		if (Transforma_CondRet(CondRet)==BAR_CondRetSemMemoria)
+		if (TransformarCondRet(CondRet)==BAR_CondRetSemMemoria)
 			return BAR_CondRetSemMemoria;
 	}
 	LIS_DestruirLista(preparado);
@@ -126,12 +133,12 @@ void BAR_DestruirBaralho(void)
 *  Função: BAR  &Saca carta
 ***************************************************************************/
 
-Carta* BAR_sacaCarta(void){
+Carta* BAR_SacarCarta(void){
 	Carta* carta;
-	if(!BaralhoDeCartas)
+	if(BaralhoDeCartas==NULL)
 		return NULL;
 	IrInicioLista(BaralhoDeCartas);
-	carta=LIS_ObterValor(BaralhoDeCartas);
+	carta=(Carta*)LIS_ObterValor(BaralhoDeCartas);
 	LIS_ExcluirElemento(BaralhoDeCartas);
 	return carta;
 }
@@ -150,10 +157,10 @@ Carta* BAR_sacaCarta(void){
 *
 ***********************************************************************/
 
-static Carta* cria_carta(char valor,char naipe)
+static Carta* CriarCarta(char valor,char naipe)
 {
 	Carta* novo=(Carta*)malloc(sizeof(Carta));
-	if(!novo)
+	if(novo==NULL)
 		return NULL;
 	novo->valor=valor;
 	novo->naipe=naipe;
@@ -174,7 +181,7 @@ static Carta* cria_carta(char valor,char naipe)
 *
 ***********************************************************************/
 
-static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet){
+static BAR_CondRet TransformarCondRet(LIS_tpCondRet CondRet){
 	switch(CondRet){
 	case LIS_CondRetOK: return BAR_CondRetOk;
 	case LIS_CondRetFaltouMemoria: return BAR_CondRetSemMemoria;
@@ -197,35 +204,62 @@ static BAR_CondRet Transforma_CondRet(LIS_tpCondRet CondRet){
 *
 ***********************************************************************/
 
-static BAR_CondRet prepara(void)
-{
+static BAR_CondRet Preparar(void){
 	LIS_tpCondRet CondRet;
 	Carta* uma_carta;
 	int i,d;
 	char tnaipe,tvalor;
-	char valor[]={'3','2','A','K','J','Q','7','6','5','4'};
-	char naipe[]={'O','E','C','P'};
 	preparado=LIS_CriarLista(NULL);
-	if (!preparado)
+	if (preparado==NULL)
 		return BAR_CondRetSemMemoria;
-	for (i=0;i<40;i++)
+	for (i=0;i<MAX_CARTAS;i++)
 	{
 		d=i;
-		if (i>=10)
-			d%=10;
+		if (i>=MAX_VALORES)
+			d%=MAX_VALORES;
 		tvalor = valor[d];
-		d=i/10;
+		d=i/MAX_VALORES;
 		tnaipe=naipe[d];
-		uma_carta = cria_carta(tvalor,tnaipe);
-		if(uma_carta)
+		uma_carta = CriarCarta(tvalor,tnaipe);
+		if(uma_carta!=NULL)
 		{
 			CondRet = LIS_InserirElementoAntes(preparado,uma_carta);
 			if (CondRet==LIS_CondRetFaltouMemoria)
-				return Transforma_CondRet(CondRet);
+				return TransformarCondRet(CondRet);
 		}
 	}
-	return Transforma_CondRet(CondRet);
+	return TransformarCondRet(CondRet);
 
 }
+
+void BAR_DestruirCarta(Carta* carta){
+	if(carta!=NULL)
+		free(carta);
+}
+
+char BAR_DefinirValorManilha(Carta* vira){
+	int i;
+	if (vira!=NULL){
+		for (i=0;i<=MAX_VALORES;i++){
+			if (vira->valor==valor[i])
+				return valor[(i+1)%MAX_VALORES];
+		}
+	}
+	return ' ';
+}
+
+char BAR_RetornarValorCarta(Carta* carta)
+{
+	if(carta!=NULL)
+	{
+		return carta->valor;
+	}
+
+	return ' ';
+}
+
+#ifdef ASSERTIVA BARALHO
+#undef ASSERTIVA_BARALHO
+#endif
 
 /************************************ Fim do módulo de implementação: BAR  Baralho  **********************************************************************/

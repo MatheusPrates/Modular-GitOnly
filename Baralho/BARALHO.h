@@ -44,10 +44,9 @@ typedef enum {
 
 	BAR_CondRetOk ,
 	/*Concluiu corretamente*/
-	BAR_CondRetSemMemoria
+	BAR_CondRetSemMemoria,
 	/* Sem memória */
-
-
+	BAR_CondRetBaralhoJaExiste
 } BAR_CondRet ;
 
 /***********************************************************************
@@ -101,7 +100,7 @@ void BAR_DestruirBaralho(void);
 *
 ***********************************************************************/
 
-BAR_CondRet BAR_embaralha(void);
+BAR_CondRet BAR_Embaralhar(void);
 
 /***********************************************************************
 *
@@ -116,8 +115,13 @@ BAR_CondRet BAR_embaralha(void);
 *
 ***********************************************************************/
 
-Carta* BAR_sacaCarta(void);
+Carta* BAR_SacarCarta(void);
 
+char BAR_DefinirValorManilha(Carta* vira);
+
+void BAR_DestruirCarta(Carta* carta);
+
+char BAR_RetornarValorCarta(Carta* carta);
 
 /************************************************ Fim do módulo de definição: BAR Baralho *****************************************************************/
 
