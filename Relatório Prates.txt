@@ -5,3 +5,10 @@
 [22/04/2016 - 20:46] Função de embaralhar feita e funcionando. Gerando um baralho totalmente randômico.
 Falta script e teste da embaralha.
 [30/04/2016 - 12:01] Toda a Placar.c foi feita, com suas respectivas funções. Falta script e teste do placar.
+[30/04/2016 - 16:23] Baralho.c e Baralho.h totalmente remodeladas. Agora o cliente não pode mais manipular um
+baralho. O mesmo fica encapsulado no módulo.
+[01/05/2016 - 12:58] Ajudando a consertar todo o script e teste do baralho. Ainda está com um pequeno erro.
+Verificaremos o porque.
+[05/05/2016 - 17:32] Adicionado a função de DefinirValorManilha no baralho. Tudo no baralho.c e baralho.h
+foi remodelado para as variáveis /funções seguirem as regras da disciplina.
+[08/05/2016 - 20:35] Tudo no placar.c e placar.h foi remodelado para as variáveis /funções seguirem as regras da disciplina.

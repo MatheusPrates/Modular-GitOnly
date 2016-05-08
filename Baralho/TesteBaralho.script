@@ -1,16 +1,229 @@
-﻿// Script:    TesteBaralho.script
-// Autor:     Matheus³
-// Data:      21/abr/2016
-// Propósito: Testar superficialmente o módulo baralho
-//
+//Script:    TesteBaralho.script
 
-//== Inicializar valores
+//Autor:     Matheus Prates, Matheus Suknaic e Matheus Cunha
+
+//Data:      23/abr/2016
+
+//Propósito: Testar superficialmente o módulo baralho
 
 
-== Criar o baralho 
-=criarbaralho	 
 
-== Destruir o baralho
-=destruirbaralho
 
-// fim
+== Inicializar valores
+
+
+=declararparm     OK 	  	    int  0
+
+=declararparm     SemMemoria        int  1
+
+=declararparm	  JaExiste 	    int  2
+
+
+
+
+=declararparm     pNULL      	    int  0
+
+=declararparm     pNaoNULL    	    int  1
+
+
+
+=declararparm	  CartaCerta	    int  0
+
+
+//******TESTES SEM CRIAR E DESTRUIR O BARALHO*************
+
+
+
+== Embaralha
+
+
+
+=embaralha SemMemoria
+
+
+
+==SacaCarta
+
+
+
+=sacacarta pNULL 
+
+
+
+==DefineManilha
+
+
+
+=definemanilha pNULL OK
+
+
+
+==RetornaValorCarta
+
+
+
+=retornavalorcarta pNULL OK
+
+
+
+==DestroiCarta
+
+
+
+=destroicarta pNULL OK
+
+
+
+//***TESTE COM BARALHO CRIADO E ZERO CARTAS NELE PORTANTO NAO EMBARALHAMOS*******
+
+//***SENDO A CARTA "TIRADA" PASSADA PARA A MANILHA E A DESTROI CARTA***
+
+
+
+==Cria Baralho
+
+
+
+=criabaralho OK
+
+
+	
+
+==SacaCarta
+
+
+
+=sacacarta pNULL
+
+
+
+==DefineManilha
+
+
+
+=definemanilha pNULL OK
+
+
+
+==RetornaValorCarta
+
+
+
+=retornavalorcarta pNULL OK
+
+
+
+==DestroiCarta
+
+
+
+=destroicarta pNULL OK
+
+
+
+==Destruir Baralho
+
+
+
+=destruirbaralho OK
+
+
+//*******************************
+
+
+
+//***TESTE COM O BARALHO CRIADO,PELO MENOS UMA CARTA NELE,SENDO A CARTA TIRADA
+
+//***PASSADA PARA A MANILHA E A DESTROI CARTA***
+
+
+
+==Cria Baralho
+
+
+
+=criabaralho OK
+
+
+
+==Embaralha
+
+
+
+=embaralha OK
+
+
+==SacaCarta
+
+
+
+=sacacarta pNaoNULL
+
+
+
+
+==DefineManilha
+
+
+
+=definemanilha pNaoNULL CartaCerta
+
+
+
+==RetornaValorCarta
+
+
+
+=retornavalorcarta pNaoNULL CartaCerta
+
+
+
+==DestroiCarta
+
+
+
+=destroicarta pNULL OK
+
+
+
+==Destruir Baralho
+
+
+
+=destruirbaralho OK
+
+
+
+//*****************************************************************
+
+
+
+//TESTE TENTANDO CRIAR DOIS BARALHOS
+
+
+
+==Cria Baralho
+
+
+
+=criabaralho OK
+
+
+
+==Cria Baralho
+
+
+
+=criabaralho JaExiste
+
+
+
+==Destruir Baralho
+
+
+
+=destruirbaralho OK
+
+
+
+//******************************************************************

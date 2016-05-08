@@ -40,16 +40,16 @@ typedef struct carta Carta;
 *
 ***********************************************************************/
 
-	typedef enum {
+typedef enum {
 
-		BAR_CondRetOK ,
-				/*Concluiu corretamente*/
+	BAR_CondRetOk ,
+	/*Concluiu corretamente*/
+	BAR_CondRetSemMemoria,
+	/* Sem memória */
+	BAR_CondRetBaralhoJaExiste
+} BAR_CondRet ;
 
-         
-
-   } BAR_tpCondRet ;
-   
-   /***********************************************************************
+/***********************************************************************
 *
 *  $FC Função: BAR  &Criar baralho
 *
@@ -57,17 +57,15 @@ typedef struct carta Carta;
 *     Cria um baralho vazio.
 *
 *  $FV Valor retornado
-*     Se executou corretamente retorna o ponteiro para o baralho.
-*     Este ponteiro será utilizado pelas funções que manipulem este baralho.
-*
-*     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
-*     a função retornará NULL.
-*     Não será dada mais informação quanto ao problema ocorrido.
+*	BAR_CondRetOK -A função conseguiu criar o baralho sem problemas.
+*	BAR_CondRetSemMemoria-Houve algum problema na hora de alocar memória
+*							para o baralho.
+*	
 *
 ***********************************************************************/
 
-	Baralho BAR_CriarBaralho();
-	
+BAR_CondRet BAR_CriarBaralho();
+
 /***********************************************************************
 *
 *  $FC Função: BAR  &Destruir baralho
@@ -79,31 +77,53 @@ typedef struct carta Carta;
 *     OBS. não existe previsão para possíveis falhas de execução.
 *
 *  $FV Valor retornado
-*     BAR_CondRetOK    - destruiu sem problemas  (???)
-*
+*     BAR_CondRetOK    - destruiu sem problemas
 ***********************************************************************/
 
-	void BAR_DestruirBaralho(Baralho Bar);
+void BAR_DestruirBaralho(void);
 
 /***********************************************************************
 *
-*  $FC Função: BAR  &Embaralha baralho
+*  $FC Função: BAR  &Embaralha
 *
 *  $ED Descrição da função
-*     Embaralha o baralho passado como parâmetro.
+*	  Embaralha o baralho passando um baralho auxiliar para ajudar na tarefa.
+*	  O Baralho auxiliar ja possui todas as cartas,se tiver sido criado sem erros.
+*     Passa carta a carta para o baralho original.
+*	  No final da função deleta o baralho auxiliar.	
 *
 *  $FV Valor retornado
-*     BAR_CondRetOK    - embaralhou sem problemas  (???)
+*     BAR_CondRetOK -A função conseguiu passar todas as cartas do baralho 
+*					 auxiliar para o principal.
+*	  BAR_CondRetSemMemoria-Houve alguma problema com o baralho principal
+*							ou auxiliar.
 *
 ***********************************************************************/
 
-	void BAR_Embaralha(Baralho baralho);
+BAR_CondRet BAR_Embaralhar(void);
 
+/***********************************************************************
+*
+*  $FC Função: BAR  &Saca carta
+*
+*  $ED Descrição da função
+*	  Retira a carta que está no topo do baralho.
+*
+*  $FV Valor retornado
+*     Retorna NULL caso o Baralho passado não exista ou esteja sem cartas.
+*	  Caso contrário retorna uma carta.
+*
+***********************************************************************/
 
+Carta* BAR_SacarCarta(void);
 
+char BAR_DefinirValorManilha(Carta* vira);
 
+void BAR_DestruirCarta(Carta* carta);
 
+char BAR_RetornarValorCarta(Carta* carta);
 
+/************************************************ Fim do módulo de definição: BAR Baralho *****************************************************************/
 
 
 
