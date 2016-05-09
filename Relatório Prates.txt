@@ -12,3 +12,4 @@ Verificaremos o porque.
 [05/05/2016 - 17:32] Adicionado a função de DefinirValorManilha no baralho. Tudo no baralho.c e baralho.h
 foi remodelado para as variáveis /funções seguirem as regras da disciplina.
 [08/05/2016 - 20:35] Tudo no placar.c e placar.h foi remodelado para as variáveis /funções seguirem as regras da disciplina.
+[08/05/2016 - 21:38] Digitalizado o modelo físico.
