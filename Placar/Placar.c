@@ -81,7 +81,7 @@ PLA_CondRet PLA_NovaRodada(void){
 	if(!placarJogo)
 		return PLA_CondRetPlacarNaoExiste;
 
-	placarJogo->vitorias_e1=0;
+	placarJogo->vitoriasE1=0;
 	placarJogo->vitoriasE2=0;
 	placarJogo->valorRodada=1;
 	placarJogo->ultimoTruco=-1;
@@ -101,7 +101,7 @@ int PLA_PegarVitorias(int equipe){
 	if (!placarJogo || !rodada || (equipe!=1 && equipe!=2))
 		return -1;
 
-	return (equipe==1)? placarJogo->vitorias_e1:placarJogo->vitoriasE2;
+	return (equipe==1)? placarJogo->vitoriasE1:placarJogo->vitoriasE2;
 
 }/* Fim função: PLA  &Pega Vitorias*/
 

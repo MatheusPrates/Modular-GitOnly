@@ -48,7 +48,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_criaPlacar() ;
+		CondRet = PLA_CriarPlacar() ;
 
 		return TST_CompararInt( CondRetEsp , CondRet , "Condicao de retorno errada.");
 
@@ -64,7 +64,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		inteiro = PLA_pegaVitorias(equipe) ;
+		inteiro = PLA_PegarVitorias(equipe) ;
 
 		return TST_CompararInt( inteiroEsp, inteiro, "Numero de vitorias diferente do esperado.");
 
@@ -80,7 +80,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		inteiro = PLA_pegaPontos(equipe) ;
+		inteiro = PLA_PegarPontos(equipe) ;
 
 		return TST_CompararInt( inteiroEsp ,inteiro , "Numero de pontos diferente do esperado.");
 
@@ -96,7 +96,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_guardaPontosEquipe(equipe) ;
+		CondRet = PLA_GuardarPontosEquipe(equipe) ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
@@ -112,7 +112,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_guardaVitoriasEquipe(equipe) ;
+		CondRet = PLA_GuardarVitoriasEquipe(equipe) ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
@@ -128,7 +128,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_terminaRodada() ;
+		CondRet = PLA_TerminarRodada() ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
@@ -160,7 +160,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_atualizaValorRodada(equipe) ;
+		CondRet = PLA_AtualizarValorRodada(equipe) ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
@@ -176,7 +176,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 			return TST_CondRetParm ;
 		} /* if */
 
-		CondRet = PLA_checaTruco(equipe) ;
+		CondRet = PLA_ChecarTruco(equipe) ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 
@@ -185,15 +185,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 	{
 
 		numLidos = LER_LerParametros( "i" ,
-			 &CondRetEsp) ;
-
+			 &CondRetEsp);
 		if ( ( numLidos != 1 ))
 		{
 			return TST_CondRetParm ;
 		} /* if */
 			
 
-		CondRet = PLA_novaRodada() ;
+		CondRet = PLA_NovaRodada() ;
 
 		return TST_CompararInt( CondRetEsp ,CondRet , "Condicao de retorno errada.");
 

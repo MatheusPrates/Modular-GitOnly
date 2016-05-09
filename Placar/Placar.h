@@ -28,7 +28,7 @@
 *	  Só é possível acontecer uma rodada de cada vez, não acontecem rodadas
 *	  simultaneas.
 *
-***************************************************************************/
+********************************************************************/
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -210,7 +210,7 @@ PLA_CondRet PLA_GuardarVitoriasEquipe(int equipe);
 *
 ***********************************************************************/
 
-PLA_CondRet PLA_terminaRodada(void); 
+PLA_CondRet PLA_TerminarRodada(void); 
 
 /***********************************************************************
 *
