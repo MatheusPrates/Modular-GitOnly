@@ -16,7 +16,22 @@
 *     1       Matheus³   21/abr/2016 início desenvolvimento
 *
 *  $ED Descrição do módulo
-*     
+* 
+*	 Implementa o conceito de baralho e manipula o baralho.
+*	 Só pode existir um baralho principal por módulo.
+*	 O baralho é criado a partir de uma lista duplamente
+*	 encadeada disponível no módulo LISTA, suas principais
+*	 funções operam sobre listas portanto.
+*
+*	 Por ser utilizado diretamente em outros módulos, a entidade baralho 
+*	 não é encapsulada em seu no seu módulo de definição.A entidade carta
+*	 por outro lado é encapsulada no módulo de definição do baralho.
+*
+*	 O baralho não pode ser somente embaralhado, ou seja, ser chamado a função	
+*	 Embaralhar se não houverem cartas nele. 
+*
+*	 A função Embaralhar já coloca todas as cartas de uma vez no baralho,caso 
+*	 o baralho principal e o auxiliar sejam diferentes de NULL.
 *
 ***************************************************************************/
 
@@ -24,7 +39,7 @@
 
 /* Tipo referência para uma lista */
 
-#include "LISTA.H"
+#include "LISTA.h"
 
 typedef LIS_tppLista Baralho;
 
@@ -46,7 +61,7 @@ typedef enum {
 	/*Concluiu corretamente*/
 	BAR_CondRetSemMemoria,
 	/* Sem memória */
-	BAR_CondRetBaralhoJaExiste
+	BAR_CondRetBaralhoJaExiste /*ja existe um baralho principal criado*/
 } BAR_CondRet ;
 
 /***********************************************************************
@@ -74,17 +89,15 @@ BAR_CondRet BAR_CriarBaralho();
 *     Destrói o baralho passado como parâmetro.
 *     Se ocorrer algum erro durante a destruição, o baralho resultará
 *     estruturalmente incorreto.
+
 *     OBS. não existe previsão para possíveis falhas de execução.
-*
-*  $FV Valor retornado
-*     BAR_CondRetOK    - destruiu sem problemas
 ***********************************************************************/
 
 void BAR_DestruirBaralho(void);
 
 /***********************************************************************
 *
-*  $FC Função: BAR  &Embaralha
+*  $FC Função: BAR  &Embaralhar
 *
 *  $ED Descrição da função
 *	  Embaralha o baralho passando um baralho auxiliar para ajudar na tarefa.
@@ -104,7 +117,7 @@ BAR_CondRet BAR_Embaralhar(void);
 
 /***********************************************************************
 *
-*  $FC Função: BAR  &Saca carta
+*  $FC Função: BAR  &Sacar Carta
 *
 *  $ED Descrição da função
 *	  Retira a carta que está no topo do baralho.
@@ -117,9 +130,63 @@ BAR_CondRet BAR_Embaralhar(void);
 
 Carta* BAR_SacarCarta(void);
 
+/***********************************************************************
+*
+*  $FC Função: BAR  &Definir Valor Manilha
+*
+*  $ED Descrição da função
+*	  Define a manilha em relação a carta passada.
+*	  A manilha é a carta seguinte em relação a carta passada.
+*
+*	$EP Parâmetros
+*
+*	Carta- Ponteiro para uma carta.
+*
+*
+*  $FV Valor retornado
+*     Retorna o caractere espaco (' ') caso a carta passada seja NULL.
+*	  Caso contrário retorna a carta seguinte a carta passada como parâmetro.
+*
+******************************************************************************/
+
 char BAR_DefinirValorManilha(Carta* vira);
 
+/***********************************************************************
+*
+*  $FC Função: BAR  &Destruir Carta
+*
+*	$EP Parâmetros
+*
+*	Carta- Ponteiro para uma carta
+*
+*  $ED Descrição da função
+*
+*     Destrói a carta passada como parâmetro.
+*
+*     OBS. não existe previsão para possíveis falhas de execução.
+*
+***********************************************************************/
+
 void BAR_DestruirCarta(Carta* carta);
+
+/***********************************************************************
+*
+*  $FC Função: BAR  &Retornar Valor Carta
+*
+*	$EP Parâmetros
+*
+*	Carta- Ponteiro para uma carta
+*
+*  $ED Descrição da função
+*
+*     Retorna o valor da carta passada como parâmetro.
+*
+*  $FV Valor retornado
+*
+*     Retorna o caractere espaco (' ') caso a carta passada seja NULL.
+*	  Caso contrário retorna o valor da carta passada como parâmetro.
+*
+***********************************************************************/
 
 char BAR_RetornarValorCarta(Carta* carta);
 
