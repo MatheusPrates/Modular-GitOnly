@@ -182,7 +182,7 @@
 
 //*********************************************************
 
-
+//******TESTE TRUCO ALTERNADO E TRUCO MAXIMO***************
 ==Cria Placar
 =criarplacar		OK
 
@@ -193,7 +193,56 @@
 =atualizarodada		1	OK
 =atualizarodada		1	TrucoNaoPossivel
 =atualizarodada		2	OK
+=atualizarodada		2	TrucoNaoPossivel
+=atualizarodada		1	OK
+=atualizarodada		2	OK
+
+==Teste Truco Maximo
+=atualizarodada		1	TrucoNaoPossivel
+
+==Guarda Pontos
 =guardapontos		1	OK
+
+//*********************************************************
+
+==Destruir Placar
+=destruirplacar		OK
+
+
+//******TESTE MAO DE ONZE***************
+
+==Criar Placar
+=criarplacar		OK
+
+==Nova Rodada
+=novarodada		OK
+
+==Chegar em 9 pontos equipe 1
+=atualizarodada		1	OK
+=atualizarodada		2	OK
+=atualizarodada		1	OK
+=guardapontos		1	OK
+
+==Segunda Rodada
+=novarodada		OK
+
+==Chegar em 10 pontos equipe 1
+=guardapontos		1	OK
+
+==Terceira Rodada
+=novarodada		OK
+
+==Chegar em 11 pontos equipe 1
+=guardapontos		1	OK
+
+==Quarta Rodada
+=novarodada		OK
+
+==Teste de truco Mao de Onze
+=checatruco		1	TrucoNaoPossivel
+=checatruco		2	TrucoNaoPossivel
+
+
 
 
 
